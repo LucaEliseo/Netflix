@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Row, Col, Image, } from "react-bootstrap";
+import { Container, Row, Col, Image, Carousel } from "react-bootstrap";
 
 class TrendingNow extends Component {
   state = {
@@ -52,16 +52,38 @@ class TrendingNow extends Component {
     }
 
     return (
-      <Container fluid style={{ backgroundColor: "#221f1f" }} className="mt-3">
-        <h4 className="mb-4">Trending Now</h4>
-        <Row>
-          {movies.slice(4).map((movie) => (
-            <Col key={movie.imdbID} xs={12} sm={6} lg={3} xl={2} className="mb-2">
-              <Image src={movie.Poster} alt="movie" id="movie" />
-            </Col>
-          ))}
-        </Row>
-      </Container>
+      <Container fluid style={{ backgroundColor: "transparent" }} className="mt-3">
+      <h4 className="mt-4 text-start text-light">
+        Friends
+      </h4>
+      <Carousel
+        pause={false}
+        interval={10000}
+        touch={true}
+        slide={true}
+        indicators={false}
+        controls={true}
+      >
+        <Carousel.Item>
+          <Row>
+            {movies.slice(0, 5).map((dish) => (
+              <Col key={dish.imdbID}>
+                <Image id="cardImg" src={dish.Poster} />
+              </Col>
+            ))}
+          </Row>
+        </Carousel.Item>
+        <Carousel.Item>
+          <Row>
+            {movies.slice(5, 10).map((dish) => (
+              <Col key={dish.imdbID}>
+                <Image id="cardImg" src={dish.Poster} />
+              </Col>
+            ))}
+          </Row>
+        </Carousel.Item>
+      </Carousel>
+    </Container>
     );
   }
 }
